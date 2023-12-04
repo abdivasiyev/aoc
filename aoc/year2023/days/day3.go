@@ -67,7 +67,7 @@ func (d *day3) isAdjacent(x, y int, lines []string) bool {
 }
 
 // First implements aoc.Solution.
-func (d *day3) First() (any, error) {
+func (d *day3) First() ([]string, error) {
 	var total int
 
 	for y, line := range d.linesFirst {
@@ -99,7 +99,7 @@ func (d *day3) First() (any, error) {
 		}
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 func (d *day3) findStartAndEnd(x int, width int, line string) (int, int) {
@@ -271,7 +271,7 @@ func (d *day3) findAdjacents(x int, y int, lines []string, used [][]bool) (int, 
 }
 
 // Second implements aoc.Solution.
-func (d *day3) Second() (any, error) {
+func (d *day3) Second() ([]string, error) {
 	var (
 		total  int
 		width  = len(d.linesSecond)
@@ -299,7 +299,7 @@ func (d *day3) Second() (any, error) {
 		}
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 // String implements aoc.Solution.

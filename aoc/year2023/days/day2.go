@@ -1,11 +1,12 @@
 package days
 
 import (
-	"aoc/aoc"
 	"fmt"
 	"slices"
 	"strconv"
 	"strings"
+
+	"aoc/aoc"
 )
 
 type day2 struct {
@@ -66,7 +67,7 @@ func (d *day2) parseLine(s string) (id int, reds []int, greens []int, blues []in
 }
 
 // First implements aoc.Solution.
-func (d *day2) First() (any, error) {
+func (d *day2) First() ([]string, error) {
 	maxReds, maxGreens, maxBlues := 12, 13, 14
 	total := 0
 
@@ -91,11 +92,11 @@ outer:
 		total += id
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 // Second implements aoc.Solution.
-func (d *day2) Second() (any, error) {
+func (d *day2) Second() ([]string, error) {
 	total := 0
 
 	for _, line := range d.linesSecond {
@@ -107,7 +108,7 @@ func (d *day2) Second() (any, error) {
 		total += maxRed * maxGreen * maxBlue
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 // String implements aoc.Solution.

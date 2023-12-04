@@ -4,6 +4,6 @@ import "fmt"
 
 type Solution interface {
 	fmt.Stringer
-	First() (any, error)
-	Second() (any, error)
+	First() ([]string, error)
+	Second() ([]string, error)
 }

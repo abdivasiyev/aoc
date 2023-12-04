@@ -1,9 +1,10 @@
 package days
 
 import (
-	"aoc/aoc"
 	"fmt"
 	"strconv"
+
+	"aoc/aoc"
 )
 
 type day1 struct {
@@ -14,7 +15,7 @@ type day1 struct {
 }
 
 // First implements aoc.Solution.
-func (d *day1) First() (any, error) {
+func (d *day1) First() ([]string, error) {
 	var total int
 
 	for _, line := range d.linesFirst {
@@ -30,11 +31,11 @@ func (d *day1) First() (any, error) {
 		total += nums[0]*10 + nums[len(nums)-1]
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 // Second implements aoc.Solution.
-func (d *day1) Second() (any, error) {
+func (d *day1) Second() ([]string, error) {
 	var (
 		total        int
 		spelled_nums = []string{
@@ -90,7 +91,7 @@ func (d *day1) Second() (any, error) {
 		total += number
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 func (d *day1) String() string {

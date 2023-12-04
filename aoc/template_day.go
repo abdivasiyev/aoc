@@ -12,13 +12,13 @@ type day struct {
 }
 
 // First implements aoc.Solution.
-func (*day) First() (any, error) {
-	return "unsolved", nil
+func (*day) First() ([]string, error) {
+	return Output("unsolved"), nil
 }
 
 // Second implements aoc.Solution.
-func (*day) Second() (any, error) {
-	return "unsolved", nil
+func (*day) Second() ([]string, error) {
+	return Output("unsolved"), nil
 }
 
 // String implements aoc.Solution.

@@ -55,7 +55,7 @@ func (d *day4) parseLine(line string) (id int, winning []int, nums []int) {
 }
 
 // First implements aoc.Solution.
-func (d *day4) First() (any, error) {
+func (d *day4) First() ([]string, error) {
 	var total int
 
 	for _, line := range d.linesFirst {
@@ -80,7 +80,7 @@ func (d *day4) First() (any, error) {
 		total += score
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 type card struct {
@@ -108,7 +108,7 @@ func (c *card) checkWinners() []int {
 }
 
 // Second implements aoc.Solution.
-func (d *day4) Second() (any, error) {
+func (d *day4) Second() ([]string, error) {
 	var (
 		total int
 		cards []*card
@@ -155,7 +155,7 @@ func (d *day4) Second() (any, error) {
 		total += c.instances
 	}
 
-	return total, nil
+	return aoc.Output(total), nil
 }
 
 // String implements aoc.Solution.
