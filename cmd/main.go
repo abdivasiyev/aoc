@@ -1,9 +1,10 @@
 package main
 
 import (
+	"fmt"
+
 	"aoc/aoc"
 	days2023 "aoc/aoc/year2023/days"
-	"fmt"
 )
 
 func main() {
@@ -11,6 +12,7 @@ func main() {
 		days2023.Day1(2023, 1),
 		days2023.Day2(2023, 2),
 		days2023.Day3(2023, 3),
+		days2023.Day4(2023, 4),
 	}
 
 	solution := solutions[len(solutions)-1]
