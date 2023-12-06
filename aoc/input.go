@@ -16,7 +16,11 @@ func ReadInput(path string) ([]string, error) {
 
 	scanner := bufio.NewScanner(f)
 	for scanner.Scan() {
-		result = append(result, scanner.Text())
+		line := scanner.Text()
+		if line == "" {
+			continue
+		}
+		result = append(result, line)
 	}
 
 	return result, nil
