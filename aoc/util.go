@@ -14,11 +14,16 @@ func Reverse(s string) string {
 }
 
 func Collect(line string, sep string) []int {
+	var nums []int
 	numsStr := strings.Split(line, sep)
-	nums := make([]int, len(numsStr))
 
-	for i, numStr := range numsStr {
-		nums[i], _ = strconv.Atoi(numStr)
+	for _, numStr := range numsStr {
+		numStr = strings.TrimSpace(numStr)
+		if numStr == "" {
+			continue
+		}
+		n, _ := strconv.Atoi(numStr)
+		nums = append(nums, n)
 	}
 
 	return nums

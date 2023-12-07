@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"sync"
 
 	"aoc/aoc"
 	days2023 "aoc/aoc/year2023/days"
@@ -15,33 +14,22 @@ func main() {
 		days2023.Day3(2023, 3),
 		days2023.Day4(2023, 4),
 		days2023.Day5(2023, 5),
+		days2023.Day6(2023, 6),
 	}
 
 	solution := solutions[len(solutions)-1]
 
 	fmt.Println(solution)
-	wg := &sync.WaitGroup{}
+	part1, err := solution.First()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Part 1: %v\n", part1)
 
-	wg.Add(2)
-
-	go func(wg *sync.WaitGroup) {
-		defer wg.Done()
-		part1, err := solution.First()
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("Part 1: %v\n", part1)
-	}(wg)
-
-	go func(wg *sync.WaitGroup) {
-		defer wg.Done()
-		part2, err := solution.Second()
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("Part 2: %v\n\n", part2)
-	}(wg)
-
-	wg.Wait()
+	part2, err := solution.Second()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Part 2: %v\n\n", part2)
 
 }
