@@ -7,13 +7,23 @@ import (
 )
 
 type day9 struct {
-	year        int
-	day         int
-	linesFirst  []string
-	linesSecond []string
+	year int
+	day  int
+
+	history [][]int
 }
 
 func (d *day9) Parse() error {
+	lines, err := aoc.ReadInput(fmt.Sprintf("./input/%04d-%02d.txt", d.year, d.day))
+	if err != nil {
+		return err
+	}
+
+	for _, line := range lines {
+		h := aoc.Collect(line, " ")
+		d.history = append(d.history, h)
+	}
+
 	return nil
 }
 
@@ -44,12 +54,10 @@ func findDiffs(history []int, s *[][]int) {
 func (d *day9) First() ([]string, error) {
 	var total int
 
-	for _, line := range d.linesFirst {
+	for _, h := range d.history {
 		var s [][]int
-
-		history := aoc.Collect(line, " ")
-		s = append(s, history)
-		findDiffs(history, &s)
+		s = append(s, h)
+		findDiffs(h, &s)
 
 		last := s[len(s)-1]
 		next := last[len(last)-1]
@@ -70,12 +78,10 @@ func (d *day9) First() ([]string, error) {
 func (d *day9) Second() ([]string, error) {
 	var total int
 
-	for _, line := range d.linesSecond {
+	for _, h := range d.history {
 		var s [][]int
-
-		history := aoc.Collect(line, " ")
-		s = append(s, history)
-		findDiffs(history, &s)
+		s = append(s, h)
+		findDiffs(h, &s)
 
 		last := s[len(s)-1]
 		prev := last[0]
@@ -98,22 +104,8 @@ func (d *day9) Name() (int, int) {
 }
 
 func Day9(y int, d int) aoc.Solution {
-	day := &day9{
-		year:        y,
-		day:         d,
-		linesFirst:  nil,
-		linesSecond: nil,
+	return &day9{
+		year: y,
+		day:  d,
 	}
-
-	var err error
-	day.linesFirst, err = aoc.ReadInput(fmt.Sprintf("./input/%d/%d/1/input.txt", y, d))
-	if err != nil {
-		panic(err)
-	}
-	day.linesSecond, err = aoc.ReadInput(fmt.Sprintf("./input/%d/%d/2/input.txt", y, d))
-	if err != nil {
-		panic(err)
-	}
-
-	return day
 }

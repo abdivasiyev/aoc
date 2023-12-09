@@ -66,7 +66,7 @@ func (r *Runner) run(solution Solution) {
 	}
 	// Calculate elapsed time and print
 	elapsedParse := time.Since(startParse)
-	fmt.Printf("Parse: %v ms\n\n", elapsedParse.Milliseconds())
+	fmt.Printf("Parse: %v μs\n\n", elapsedParse.Microseconds())
 
 	// Starting timer before First
 	startFirst := time.Now()
@@ -76,7 +76,7 @@ func (r *Runner) run(solution Solution) {
 	}
 	// Calculate elapsed time and print
 	elapsedFirst := time.Since(startFirst)
-	fmt.Printf("Part 1 [%v ms]: %v\n", elapsedFirst.Milliseconds(), printWithPadding(firstRes))
+	fmt.Printf("Part 1 [%v μs]: %v\n", elapsedFirst.Microseconds(), printWithPadding(firstRes))
 
 	// Starting timer before Second
 	startSecond := time.Now()
@@ -86,5 +86,5 @@ func (r *Runner) run(solution Solution) {
 	}
 	// Calculate elapsed time and print
 	elapsedSecond := time.Since(startSecond)
-	fmt.Printf("Part 2 [%v ms]: %v\n", elapsedSecond.Milliseconds(), printWithPadding(secondRes))
+	fmt.Printf("Part 2 [%v μs]: %v\n", elapsedSecond.Microseconds(), printWithPadding(secondRes))
 }
