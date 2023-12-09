@@ -128,9 +128,9 @@ func (d *day8) Second() ([]string, error) {
 	return aoc.Output(allSteps), nil
 }
 
-// String implements aoc.Solution.
-func (d *day8) String() string {
-	return fmt.Sprintf("***AOC %d***\n___DAY %d___\n", d.year, d.day)
+// Name implements aoc.Solution.
+func (d *day8) Name() (int, int) {
+	return d.year, d.day
 }
 
 func Day8(y int, d int) aoc.Solution {

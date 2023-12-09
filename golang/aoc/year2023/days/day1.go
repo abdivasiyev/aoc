@@ -94,8 +94,8 @@ func (d *day1) Second() ([]string, error) {
 	return aoc.Output(total), nil
 }
 
-func (d *day1) String() string {
-	return fmt.Sprintf("***AOC %d***\n___DAY %d___\n", d.year, d.day)
+func (d *day1) Name() (int, int) {
+	return d.year, d.day
 }
 
 func Day1(y int, d int) aoc.Solution {

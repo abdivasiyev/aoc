@@ -1,9 +1,7 @@
 package aoc
 
-import "fmt"
-
 type Solution interface {
-	fmt.Stringer
+	Name() (year int, day int)
 	First() ([]string, error)
 	Second() ([]string, error)
 }
