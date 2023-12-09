@@ -81,12 +81,12 @@ impl aoclib::Solution for Aoc2023_01 {
         }).collect();
     }
 
-    fn part_one(&mut self) -> String {
+    fn part_one(&mut self) -> Vec<String> {
         let total: i32 = self.calibration_values.iter().sum();
         aoclib::output(total)
     }
 
-    fn part_two(&mut self) -> String {
+    fn part_two(&mut self) -> Vec<String> {
         let total: i32 = self.calibration_values.iter().sum();
         aoclib::output(total)
     }

@@ -5,8 +5,8 @@ use std::time::Instant;
 pub trait Solution {
     fn id(&self) -> (i32, i32);
     fn parse(&mut self);
-    fn part_one(&mut self) -> String;
-    fn part_two(&mut self) -> String;
+    fn part_one(&mut self) -> Vec<String>;
+    fn part_two(&mut self) -> Vec<String>;
 }
 
 pub enum Mode {
@@ -92,6 +92,6 @@ pub fn read_lines(path: &str) -> Vec<String> {
     return lines;
 }
 
-pub fn output<T: Display>(arg: T) -> String {
-    format!("{}", arg)
+pub fn output<T: Display>(arg: T) -> Vec<String> {
+    vec![format!("{}", arg)]
 }
