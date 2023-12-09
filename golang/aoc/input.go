@@ -2,6 +2,7 @@ package aoc
 
 import (
 	"bufio"
+	"errors"
 	"os"
 )
 
@@ -10,7 +11,15 @@ func ReadInput(path string) ([]string, error) {
 
 	f, err := os.Open(path)
 	if err != nil {
-		return nil, err
+		if errors.Is(err, os.ErrNotExist) {
+			// create file
+			f, err = os.Create(path)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			return nil, err
+		}
 	}
 	defer f.Close()
 
