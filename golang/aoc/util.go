@@ -28,3 +28,22 @@ func Collect(line string, sep string) []int {
 
 	return nums
 }
+
+func GCD[T int | int64 | int32](a, b T) T {
+	for b != 0 {
+		t := b
+		b = a % b
+		a = t
+	}
+	return a
+}
+
+func LCM[T int | int64 | int32](a, b T, integers ...T) T {
+	result := a * b / GCD(a, b)
+
+	for i := 0; i < len(integers); i++ {
+		result = LCM(result, integers[i])
+	}
+
+	return result
+}
