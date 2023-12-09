@@ -13,6 +13,10 @@ type day9 struct {
 	linesSecond []string
 }
 
+func (d *day9) Parse() error {
+	return nil
+}
+
 func findDiffs(history []int, s *[][]int) {
 	isAllZero := true
 	for i := 0; i < len(history); i++ {

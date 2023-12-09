@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"aoc/aoc"
 	days2023 "aoc/aoc/year2023/days"
 )
@@ -20,19 +18,8 @@ func main() {
 		days2023.Day9(2023, 9),
 	}
 
-	solution := solutions[len(solutions)-1]
-
-	fmt.Println(solution)
-	part1, err := solution.First()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("Part 1: %v\n", part1)
-
-	part2, err := solution.Second()
-	if err != nil {
-		panic(err)
-	}
-	fmt.Printf("Part 2: %v\n\n", part2)
+	runner := aoc.New(aoc.Last)
+	runner.Add(solutions...)
+	runner.Run()
 
 }

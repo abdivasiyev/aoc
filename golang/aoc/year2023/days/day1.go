@@ -14,6 +14,10 @@ type day1 struct {
 	linesSecond []string
 }
 
+func (d *day1) Parse() error {
+	return nil
+}
+
 // First implements aoc.Solution.
 func (d *day1) First() ([]string, error) {
 	var total int

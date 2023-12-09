@@ -15,6 +15,10 @@ type day3 struct {
 	linesSecond []string
 }
 
+func (d *day3) Parse() error {
+	return nil
+}
+
 func (d *day3) isSymbol(ch byte) bool {
 	if ch >= '0' && ch <= '9' {
 		return false

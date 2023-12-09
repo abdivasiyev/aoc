@@ -16,6 +16,10 @@ type day6 struct {
 	linesSecond []string
 }
 
+func (d *day6) Parse() error {
+	return nil
+}
+
 func (d *day6) parse(lines []string) ([]int, []int) {
 	if len(lines) < 2 {
 		return nil, nil

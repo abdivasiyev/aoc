@@ -15,6 +15,10 @@ type day4 struct {
 	linesSecond []string
 }
 
+func (d *day4) Parse() error {
+	return nil
+}
+
 func (d *day4) parseLine(line string) (id int, winning []int, nums []int) {
 	var err error
 

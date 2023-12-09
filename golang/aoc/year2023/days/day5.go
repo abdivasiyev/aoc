@@ -15,6 +15,10 @@ type day5 struct {
 	linesSecond []string
 }
 
+func (d *day5) Parse() error {
+	return nil
+}
+
 type singleMap struct {
 	start int
 	end   int

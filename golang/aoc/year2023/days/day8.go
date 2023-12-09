@@ -14,6 +14,10 @@ type day8 struct {
 	linesSecond []string
 }
 
+func (d *day8) Parse() error {
+	return nil
+}
+
 type networkNode struct {
 	value string
 	left  string

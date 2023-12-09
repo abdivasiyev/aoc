@@ -18,6 +18,10 @@ type day7 struct {
 	linesSecond []string
 }
 
+func (d *day7) Parse() error {
+	return nil
+}
+
 type hand struct {
 	cards    string
 	handType int
