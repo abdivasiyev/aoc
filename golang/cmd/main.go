@@ -17,6 +17,7 @@ func main() {
 		days2023.Day6(2023, 6),
 		days2023.Day7(2023, 7),
 		days2023.Day8(2023, 8),
+		days2023.Day9(2023, 9),
 	}
 
 	solution := solutions[len(solutions)-1]
