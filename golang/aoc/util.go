@@ -47,3 +47,11 @@ func LCM[T int | int64 | int32](a, b T, integers ...T) T {
 
 	return result
 }
+
+func Abs(n int) int {
+	if n < 0 {
+		return -n
+	}
+
+	return n
+}
