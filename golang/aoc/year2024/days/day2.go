@@ -78,14 +78,46 @@ func (d *day2) Second() ([]string, error) {
 }
 
 func isSingleSafe(nums []int) bool {
+	if len(nums) == 0 {
+		return false
+	}
+
 	if isSafe(nums) {
 		return true
 	}
 
 	for i := 0; i < len(nums); i++ {
-		newNums := aoc.CopyExcept(nums, i)
-		// fmt.Println("newNums", newNums, "nums", nums)
-		if isSafe(newNums) {
+		var (
+			prev       = -1
+			isNegative bool
+			firstItem  = true
+			broken     bool
+		)
+		for j := 0; j < len(nums); j++ {
+			if i == j {
+				continue
+			}
+
+			if prev == -1 {
+				prev = nums[j]
+				continue
+			}
+
+			diff := aoc.Abs(nums[j] - prev)
+			if firstItem {
+				isNegative = nums[j]-prev < 0
+			}
+			firstItem = false
+
+			if diff < 1 || diff > 3 || nums[j]-prev < 0 != isNegative {
+				broken = true
+				break
+			}
+
+			prev = nums[j]
+		}
+
+		if !broken {
 			return true
 		}
 	}
