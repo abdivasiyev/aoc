@@ -55,3 +55,10 @@ func Abs(n int) int {
 
 	return n
 }
+
+func CopyExcept[T any](slice []T, i int) []T {
+	s := make([]T, 0, len(slice)-1)
+	s = append(s, slice[:i]...)
+	s = append(s, slice[i+1:]...)
+	return s
+}

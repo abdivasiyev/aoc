@@ -8,6 +8,7 @@ import (
 func main() {
 	solutions := []aoc.Solution{
 		days2024.Day1(2024, 1),
+		days2024.Day2(2024, 2),
 	}
 
 	runner := aoc.New(aoc.Last)
