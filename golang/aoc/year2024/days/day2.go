@@ -88,11 +88,11 @@ func Day2(y int, d int) aoc.Solution {
 	}
 
 	var err error
-	day2.linesFirst, err = aoc.ReadInput(fmt.Sprintf("input/%d/%d/input.txt", y, d))
+	day2.linesFirst, err = aoc.ReadInput(fmt.Sprintf("input/%d_%d.txt", y, d))
 	if err != nil {
 		panic(err)
 	}
-	day2.linesSecond, err = aoc.ReadInput(fmt.Sprintf("input/%d/%d/input.txt", y, d))
+	day2.linesSecond, err = aoc.ReadInput(fmt.Sprintf("input/%d_%d.txt", y, d))
 	if err != nil {
 		panic(err)
 	}
