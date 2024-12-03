@@ -1,1 +1,1 @@
-pub mod aoc_2023;
+pub mod aoc_2024;

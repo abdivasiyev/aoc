@@ -33,27 +33,18 @@ func (d *day2) First() ([]string, error) {
 }
 
 func isSafe(nums []int) bool {
-	if len(nums) == 0 {
-		return false
-	}
+	return isMonothonic(nums, func(a, b int) bool {
+		return a > b && a-b >= 1 && a-b <= 3
+	}) || isMonothonic(nums, func(a, b int) bool {
+		return a < b && b-a >= 1 && b-a <= 3
+	})
+}
 
-	var (
-		prev       = nums[0]
-		isNegative bool
-	)
-
-	for i := 1; i < len(nums); i++ {
-		diff := aoc.Abs(nums[i] - prev)
-		if diff < 1 || diff > 3 {
+func isMonothonic(nums []int, fn func(int, int) bool) bool {
+	for i := len(nums) - 1; i > 0; i-- {
+		if !fn(nums[i], nums[i-1]) {
 			return false
 		}
-		if i == 1 {
-			isNegative = nums[i]-prev < 0
-		}
-		if nums[i]-prev < 0 != isNegative {
-			return false
-		}
-		prev = nums[i]
 	}
 
 	return true
@@ -64,65 +55,24 @@ func (d *day2) Second() ([]string, error) {
 	var safeReports int
 
 	for _, line := range d.linesSecond {
-		var (
-			nums = aoc.Collect(line, " ")
-		)
+		var nums = aoc.Collect(line, " ")
 
-		if isSingleSafe(nums) {
+		if isSafe(nums) {
 			safeReports++
+			continue
 		}
-		// fmt.Println("========================")
+
+		for i := 0; i < len(nums); i++ {
+			subNums := aoc.CopyExcept(nums, i)
+
+			if isSafe(subNums) {
+				safeReports++
+				break
+			}
+		}
 	}
 
 	return aoc.Output(safeReports), nil
-}
-
-func isSingleSafe(nums []int) bool {
-	if len(nums) == 0 {
-		return false
-	}
-
-	if isSafe(nums) {
-		return true
-	}
-
-	for i := 0; i < len(nums); i++ {
-		var (
-			prev       = -1
-			isNegative bool
-			firstItem  = true
-			broken     bool
-		)
-		for j := 0; j < len(nums); j++ {
-			if i == j {
-				continue
-			}
-
-			if prev == -1 {
-				prev = nums[j]
-				continue
-			}
-
-			diff := aoc.Abs(nums[j] - prev)
-			if firstItem {
-				isNegative = nums[j]-prev < 0
-			}
-			firstItem = false
-
-			if diff < 1 || diff > 3 || nums[j]-prev < 0 != isNegative {
-				broken = true
-				break
-			}
-
-			prev = nums[j]
-		}
-
-		if !broken {
-			return true
-		}
-	}
-
-	return false
 }
 
 func (d *day2) Name() (int, int) {
@@ -138,11 +88,11 @@ func Day2(y int, d int) aoc.Solution {
 	}
 
 	var err error
-	day2.linesFirst, err = aoc.ReadInput(fmt.Sprintf("../input/%d/%d/input.txt", y, d))
+	day2.linesFirst, err = aoc.ReadInput(fmt.Sprintf("input/%d/%d/input.txt", y, d))
 	if err != nil {
 		panic(err)
 	}
-	day2.linesSecond, err = aoc.ReadInput(fmt.Sprintf("../input/%d/%d/input.txt", y, d))
+	day2.linesSecond, err = aoc.ReadInput(fmt.Sprintf("input/%d/%d/input.txt", y, d))
 	if err != nil {
 		panic(err)
 	}

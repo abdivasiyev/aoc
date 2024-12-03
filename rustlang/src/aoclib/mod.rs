@@ -1,6 +1,5 @@
 use std::fmt::Display;
 use std::fs::read_to_string;
-use std::time::Instant;
 
 pub trait Solution {
     fn id(&self) -> (i32, i32);
@@ -58,28 +57,15 @@ impl Runner {
     fn print_solution(solution: &mut Box<dyn Solution>) {
         let (year, day) = solution.id();
 
-        let parsing_started = Instant::now();
         solution.parse();
-        let parsing_elapsed = parsing_started.elapsed().as_millis();
 
-        let part_one_started = Instant::now();
         let output_one = solution.part_one();
-        let part_one_elapsed = part_one_started.elapsed().as_millis();
-
-        let part_two_started = Instant::now();
         let output_two = solution.part_two();
-        let part_two_elapsed = part_two_started.elapsed().as_millis();
 
-        println!("**Year {year:04} - Day {day:02}**\n\n");
-        println!("Parsing [{parsing_elapsed} ms]\n");
-        println!("Part 1  [{part_one_elapsed} ms]:{:14}{output_one}", "");
-        println!("Part 2  [{part_two_elapsed} ms]:{:14}{output_two}", "");
-        println!("\n\n");
+        println!("\n{year} - Day {day}\n", year = year, day = day);
+        println!("Part 1: {output}", output = output_one.join(" "));
+        println!("Part 2: {output}\n", output = output_two.join(" "));
     }
-}
-
-pub fn hello() {
-    println!("Hello from library!");
 }
 
 pub fn read_lines(path: &str) -> Vec<String> {
@@ -90,6 +76,17 @@ pub fn read_lines(path: &str) -> Vec<String> {
     }
 
     return lines;
+}
+
+pub fn numbers(lines: Vec<String>) -> Vec<Vec<i64>> {
+    lines
+        .iter()
+        .map(|line| {
+            line.split_whitespace()
+                .map(|num| num.parse::<i64>().unwrap())
+                .collect()
+        })
+        .collect()
 }
 
 pub fn output<T: Display>(arg: T) -> Vec<String> {
