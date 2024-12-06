@@ -2,6 +2,7 @@ use rustlang::aoc::aoc_2024;
 use rustlang::aoclib::*;
 
 fn main() {
+    println!("Advent of Code 2024");
     let mut runner = Runner::new(Mode::Last);
 
     runner.add(Box::new(aoc_2024::Aoc2024_01::new()));
@@ -9,7 +10,7 @@ fn main() {
     runner.add(Box::new(aoc_2024::Aoc2024_03::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_04::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_05::new()));
-    // runner.add(Box::new(aoc_2024::Aoc2024_06::new()));
+    runner.add(Box::new(aoc_2024::Aoc2024_06::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_07::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_08::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_09::new()));
