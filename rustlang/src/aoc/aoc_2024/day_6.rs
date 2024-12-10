@@ -69,7 +69,9 @@ impl aoclib::Solution for Aoc2024_06 {
 
         for obstacle_i in 0..self.map.len() {
             for obstacle_j in 0..self.map[obstacle_i].len() {
-                if self.map[obstacle_i][obstacle_j] == '#' || self.map[obstacle_i][obstacle_j] == '^' {
+                if self.map[obstacle_i][obstacle_j] == '#'
+                    || self.map[obstacle_i][obstacle_j] == '^'
+                {
                     continue;
                 }
 
@@ -111,8 +113,7 @@ impl aoclib::Solution for Aoc2024_06 {
                     curr = (i, j);
                 }
 
-                                map[obstacle_i][obstacle_j] = '.';
-
+                map[obstacle_i][obstacle_j] = '.';
             }
         }
 
