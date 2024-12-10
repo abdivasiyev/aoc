@@ -10,7 +10,7 @@ impl Aoc2024_06 {
         Default::default()
     }
 
-    fn dfs(&self, map: &mut Vec<Vec<char>>, i: i64, j: i64, dir: (i64, i64)) -> bool {
+    fn dfs_part_one(&self, map: &mut Vec<Vec<char>>, i: i64, j: i64, dir: (i64, i64)) -> bool {
         if i < 0 || i >= self.map.len() as i64 || j < 0 || j >= self.map[0].len() as i64 {
             return false;
         }
@@ -43,7 +43,7 @@ impl Aoc2024_06 {
             };
         }
 
-        self.dfs(map, i + new_dir.0, j + new_dir.1, new_dir)
+        self.dfs_part_one(map, i + new_dir.0, j + new_dir.1, new_dir)
     }
 }
 
@@ -66,7 +66,7 @@ impl aoclib::Solution for Aoc2024_06 {
         for i in 0..self.map.len() {
             for j in 0..self.map[0].len() {
                 if self.map[i][j] == '^' {
-                    self.dfs(&mut map, i as i64, j as i64, (-1, 0));
+                    self.dfs_part_one(&mut map, i as i64, j as i64, (-1, 0));
                 }
             }
         }
