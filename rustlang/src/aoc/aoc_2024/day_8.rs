@@ -5,6 +5,7 @@ use crate::aoclib;
 #[derive(Default)]
 pub struct Aoc2024_08 {
     indexes: HashMap<char, Vec<(i64, i64)>>,
+    map: Vec<Vec<char>>,
     width: i64,
     height: i64,
 }
@@ -22,7 +23,7 @@ impl aoclib::Solution for Aoc2024_08 {
 
     fn parse(&mut self) {
         let lines = aoclib::read_lines("input/2024_8.txt");
-        //let lines = aoclib::read_lines("test.txt");
+        // let lines = aoclib::read_lines("test.txt");
         let map: Vec<Vec<char>> = lines.iter().map(|x| x.chars().collect()).collect();
 
         for i in 0..map.len() {
@@ -44,6 +45,7 @@ impl aoclib::Solution for Aoc2024_08 {
 
         self.width = map[0].len() as i64;
         self.height = map.len() as i64;
+        self.map = map;
     }
 
     fn part_one(&mut self) -> Vec<String> {
@@ -89,6 +91,53 @@ impl aoclib::Solution for Aoc2024_08 {
     }
 
     fn part_two(&mut self) -> Vec<String> {
-        aoclib::output("unsolved")
+        let mut antinodes: HashSet<(i64, i64)> = HashSet::new();
+
+        for (_, indexes) in self.indexes.iter() {
+            if indexes.len() == 1 {
+                continue;
+            }
+
+            for (i, j) in indexes {
+                antinodes.insert((*i, *j));
+                for (k, n) in indexes {
+                    if i == k && j == n {
+                        continue;
+                    }
+
+                    let di = if i < k {
+                        -1 * k.abs_diff(*i) as i64
+                    } else {
+                        k.abs_diff(*i) as i64
+                    };
+
+                    let dj = if j < n {
+                        -1 * n.abs_diff(*j) as i64
+                    } else {
+                        n.abs_diff(*j) as i64
+                    };
+
+                    let mut antinode_i = i + di;
+                    let mut antinode_j = j + dj;
+
+                    while antinode_i >= 0
+                        && antinode_i < self.height
+                        && antinode_j >= 0
+                        && antinode_j < self.width
+                    {
+                        if self.map[antinode_i as usize][antinode_j as usize] != '.' {
+                            antinode_i += di;
+                            antinode_j += dj;
+                            continue;
+                        }
+                        antinodes.insert((antinode_i, antinode_j));
+                        antinode_j += dj;
+                        antinode_i += di;
+                    }
+                }
+            }
+        }
+
+        aoclib::output(antinodes.len())
     }
 }
