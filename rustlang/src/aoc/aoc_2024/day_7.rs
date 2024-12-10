@@ -10,9 +10,8 @@ impl Aoc2024_07 {
         Default::default()
     }
 
-    fn is_valid(&self, test_value: i64, nums: Vec<i64>) -> Option<i64> {
-        let operators: Vec<String> = vec!["+".to_string(), "*".to_string()];
-        let n = nums.len()-1;
+    fn is_valid(&self, test_value: i64, nums: Vec<i64>, operators: Vec<String>) -> Option<i64> {
+        let n = nums.len() - 1;
         let combinations = aoclib::combinations(&operators, n);
 
         for combination in combinations {
@@ -20,11 +19,15 @@ impl Aoc2024_07 {
             let operators = combination.chars().collect::<Vec<char>>();
 
             for i in 1..nums.len() {
-                let operator = operators[i-1];
+                if val > test_value {
+                    break;
+                }
+                let operator = operators[i - 1];
 
                 match operator {
                     '+' => val += nums[i],
                     '*' => val *= nums[i],
+                    '|' => val = format!("{}{}", val, nums[i]).parse::<i64>().unwrap(),
                     _ => panic!("invalid operator"),
                 }
             }
@@ -45,7 +48,7 @@ impl aoclib::Solution for Aoc2024_07 {
 
     fn parse(&mut self) {
         let lines = aoclib::read_lines("input/2024_7.txt");
-        // let lines = aoclib::read_lines("test.txt");
+        //let lines = aoclib::read_lines("test.txt");
 
         for line in lines {
             let line = line.split_once(": ").unwrap();
@@ -53,13 +56,10 @@ impl aoclib::Solution for Aoc2024_07 {
             match line {
                 (test_value, nums) => {
                     let test_value = test_value.parse::<i64>().unwrap();
-                    let nums = nums
-                        .split(" ")
-                        .map(|x| x.parse::<i64>().unwrap())
-                        .collect();
+                    let nums = nums.split(" ").map(|x| x.parse::<i64>().unwrap()).collect();
 
                     self.calibrations.push((test_value, nums));
-                },
+                }
             }
         }
     }
@@ -68,12 +68,31 @@ impl aoclib::Solution for Aoc2024_07 {
         let calibration_sums = self
             .calibrations
             .iter()
-            .map(|(test_value, nums)| self.is_valid(*test_value, nums.to_vec()).unwrap_or(0))
+            .map(|(test_value, nums)| {
+                self.is_valid(
+                    *test_value,
+                    nums.to_vec(),
+                    vec!["+".to_string(), "*".to_string()],
+                )
+                .unwrap_or(0)
+            })
             .sum::<i64>();
         aoclib::output(calibration_sums)
     }
 
     fn part_two(&mut self) -> Vec<String> {
-        aoclib::output("unsolved")
+        let calibration_sums = self
+            .calibrations
+            .iter()
+            .map(|(test_value, nums)| {
+                self.is_valid(
+                    *test_value,
+                    nums.to_vec(),
+                    vec!["+".to_string(), "*".to_string(), "|".to_string()],
+                )
+                .unwrap_or(0)
+            })
+            .sum::<i64>();
+        aoclib::output(calibration_sums)
     }
 }

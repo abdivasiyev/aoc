@@ -95,17 +95,19 @@ pub fn output<T: Display>(arg: T) -> Vec<String> {
 }
 
 pub fn combinations(items: &Vec<String>, n: usize) -> Vec<String> {
-    (2..n).fold(
+    let combined = (2..n).fold(
         items
             .iter()
             .cartesian_product(items.iter())
             .map(|(a, b)| a.to_owned() + b)
             .collect(),
-        |acc, _| {
+        |acc: Vec<String>, _| {
             acc.into_iter()
                 .cartesian_product(items.iter())
                 .map(|(a, b)| a.to_owned() + b)
                 .collect()
         },
-    )
+    );
+
+    Vec::from_iter(combined)
 }
