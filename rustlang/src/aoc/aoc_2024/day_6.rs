@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::aoclib;
 
 #[derive(Default)]
@@ -8,42 +10,6 @@ pub struct Aoc2024_06 {
 impl Aoc2024_06 {
     pub fn new() -> Self {
         Default::default()
-    }
-
-    fn dfs_part_one(&self, map: &mut Vec<Vec<char>>, i: i64, j: i64, dir: (i64, i64)) -> bool {
-        if i < 0 || i >= self.map.len() as i64 || j < 0 || j >= self.map[0].len() as i64 {
-            return false;
-        }
-
-        if map[i as usize][j as usize] == '#' {
-            return false;
-        }
-
-        map[i as usize][j as usize] = 'X';
-
-        let (new_i, new_j) = (i + dir.0, j + dir.1);
-
-        if new_i < 0
-            || new_i >= self.map.len() as i64
-            || new_j < 0
-            || new_j >= self.map[0].len() as i64
-        {
-            return true;
-        }
-
-        let mut new_dir = dir;
-
-        if self.map[new_i as usize][new_j as usize] == '#' {
-            new_dir = match dir {
-                (-1, 0) => (0, 1),
-                (0, 1) => (1, 0),
-                (1, 0) => (0, -1),
-                (0, -1) => (-1, 0),
-                _ => return false,
-            };
-        }
-
-        self.dfs_part_one(map, i + new_dir.0, j + new_dir.1, new_dir)
     }
 }
 
@@ -60,29 +26,96 @@ impl aoclib::Solution for Aoc2024_06 {
     }
 
     fn part_one(&mut self) -> Vec<String> {
-        let mut count = 0;
+        let dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)];
+        let mut dir = 0;
         let mut map = self.map.clone();
+        let mut curr = (0, 0);
+        let mut visited = HashSet::new();
 
-        for i in 0..self.map.len() {
-            for j in 0..self.map[0].len() {
-                if self.map[i][j] == '^' {
-                    self.dfs_part_one(&mut map, i as i64, j as i64, (-1, 0));
+        for i in 0..map.len() {
+            for j in 0..map[0].len() {
+                if map[i][j] == '^' {
+                    curr = (i as i64, j as i64);
+                    map[i][j] = '.';
                 }
             }
         }
 
-        for i in 0..self.map.len() {
-            for j in 0..self.map[0].len() {
-                if map[i][j] == 'X' {
-                    count += 1;
-                }
+        loop {
+            visited.insert(curr);
+
+            let curr_dir = dirs[dir];
+            let i = curr.0 + curr_dir.0;
+            let j = curr.1 + curr_dir.1;
+
+            if i < 0 || i >= map.len() as i64 || j < 0 || j >= map[0].len() as i64 {
+                break;
             }
+
+            if map[i as usize][j as usize] == '#' {
+                dir = (dir + 1) % dirs.len();
+                continue;
+            }
+            curr = (i, j);
         }
 
-        aoclib::output(count)
+        aoclib::output(visited.len())
     }
 
     fn part_two(&mut self) -> Vec<String> {
-        aoclib::output("unsolved")
+        let mut possible_obstacles = 0;
+        let dirs = [(-1, 0), (0, 1), (1, 0), (0, -1)];
+        let mut map = self.map.clone();
+
+        for obstacle_i in 0..self.map.len() {
+            for obstacle_j in 0..self.map[obstacle_i].len() {
+                if self.map[obstacle_i][obstacle_j] == '#' || self.map[obstacle_i][obstacle_j] == '^' {
+                    continue;
+                }
+
+                let mut dir = 0;
+                let mut curr = (0, 0);
+                let mut visited = HashSet::new();
+                let mut steps = 0;
+
+                for i in 0..map.len() {
+                    for j in 0..map[0].len() {
+                        if map[i][j] == '^' {
+                            curr = (i as i64, j as i64);
+                        }
+                    }
+                }
+
+                map[obstacle_i][obstacle_j] = '#';
+
+                loop {
+                    if steps >= 100_000 {
+                        possible_obstacles += 1;
+                        break;
+                    }
+                    steps += 1;
+                    visited.insert(curr);
+
+                    let curr_dir = dirs[dir];
+                    let i = curr.0 + curr_dir.0;
+                    let j = curr.1 + curr_dir.1;
+
+                    if i < 0 || i >= map.len() as i64 || j < 0 || j >= map[0].len() as i64 {
+                        break;
+                    }
+
+                    if map[i as usize][j as usize] == '#' {
+                        dir = (dir + 1) % dirs.len();
+                        continue;
+                    }
+                    curr = (i, j);
+                }
+
+                                map[obstacle_i][obstacle_j] = '.';
+
+            }
+        }
+
+        aoclib::output(possible_obstacles)
     }
 }
