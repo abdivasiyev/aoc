@@ -13,7 +13,7 @@ fn main() {
     runner.add(Box::new(aoc_2024::Aoc2024_06::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_07::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_08::new()));
-    // runner.add(Box::new(aoc_2024::Aoc2024_09::new()));
+    runner.add(Box::new(aoc_2024::Aoc2024_09::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_10::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_11::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_12::new()));
