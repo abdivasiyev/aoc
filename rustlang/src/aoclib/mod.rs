@@ -1,3 +1,4 @@
+use itertools::Itertools;
 use std::fmt::Display;
 use std::fs::read_to_string;
 
@@ -91,4 +92,20 @@ pub fn numbers(lines: Vec<String>) -> Vec<Vec<i64>> {
 
 pub fn output<T: Display>(arg: T) -> Vec<String> {
     vec![format!("{}", arg)]
+}
+
+pub fn combinations(items: &Vec<String>, n: usize) -> Vec<String> {
+    (2..n).fold(
+        items
+            .iter()
+            .cartesian_product(items.iter())
+            .map(|(a, b)| a.to_owned() + b)
+            .collect(),
+        |acc, _| {
+            acc.into_iter()
+                .cartesian_product(items.iter())
+                .map(|(a, b)| a.to_owned() + b)
+                .collect()
+        },
+    )
 }
