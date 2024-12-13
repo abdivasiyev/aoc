@@ -16,7 +16,7 @@ fn main() {
     runner.add(Box::new(aoc_2024::Aoc2024_09::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_10::new()));
     runner.add(Box::new(aoc_2024::Aoc2024_11::new()));
-    // runner.add(Box::new(aoc_2024::Aoc2024_12::new()));
+    runner.add(Box::new(aoc_2024::Aoc2024_12::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_13::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_14::new()));
     // runner.add(Box::new(aoc_2024::Aoc2024_15::new()));
