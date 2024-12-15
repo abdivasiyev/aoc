@@ -121,5 +121,5 @@ pub fn gcd(a: i64, b: i64) -> i64 {
 }
 
 pub fn lcm(a: i64, b: i64) -> i64 {
-    a*b / gcd(a, b)
+    a * b / gcd(a, b)
 }
