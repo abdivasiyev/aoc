@@ -12,6 +12,7 @@ pub use day_11::Aoc2024_11 as Aoc2024_11;
 pub use day_12::Aoc2024_12 as Aoc2024_12;
 pub use day_13::Aoc2024_13 as Aoc2024_13;
 pub use day_14::Aoc2024_14 as Aoc2024_14;
+pub use day_15::Aoc2024_15 as Aoc2024_15;
 
 mod day_1;
 mod day_2;
@@ -27,3 +28,4 @@ mod day_11;
 mod day_12;
 mod day_13;
 mod day_14;
+mod day_15;

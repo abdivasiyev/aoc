@@ -123,3 +123,7 @@ pub fn gcd(a: i64, b: i64) -> i64 {
 pub fn lcm(a: i64, b: i64) -> i64 {
     a * b / gcd(a, b)
 }
+
+pub fn inside(me: (i64, i64), w: i64, h: i64) -> bool {
+    me.0 >= 0 && me.0 < h && me.1 >= 0 && me.1 < w
+}
